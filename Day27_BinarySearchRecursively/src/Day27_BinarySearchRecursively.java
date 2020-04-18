@@ -87,7 +87,7 @@ public class Day27_BinarySearchRecursively {
 				for(int i = 0; i <= sortedList.size() - 1; i++) { intArray[i] = sortedList.get(i); } // Add all sorted values to the array.
 				try {
 					int key = Integer.parseInt(txtNumToFind.getText());								 // Try to parse the user's input key as an integer.
-					int index = recursiveBinarySearch(intArray, 0, sortedList.size(), key);			 // Call the binary search function.
+					int index = recursiveBinarySearch(intArray, 0, intArray.length - 1, key);			 // Call the binary search function.
 					// If nothing was found... Tell the user.
 					if(index == -1) { JOptionPane.showMessageDialog(null, "Your number was not found in the list!", "An Error Has Occurred", JOptionPane.ERROR_MESSAGE); }
 					else { lblFoundAt.setText(lblFoundAt.getText() + index); }						 // Otherwise... Tell the user the index that their number could be found at.
@@ -103,12 +103,11 @@ public class Day27_BinarySearchRecursively {
 	
 	// This function recursively finds a number in a sorted array.
 	public static int recursiveBinarySearch(int[] sortedArray, int left, int right, int key) {
-        if (left < right) {																						// If the left most value is less than the right most value...
-            int mid = left + (right - left) / 2;  																// Get the mid point.
+        if (left <= right) {																						// If the left most value is less than the right most value...
+            int mid = left + ((right - left) / 2);  																// Get the mid point.
             if (key < sortedArray[mid]) { return recursiveBinarySearch(sortedArray, left, mid - 1, key); } 			// If the key value is less than the value at the mid point... call the function again with the midpoint - 1 as the new night most value.
             else if (key > sortedArray[mid]) { return recursiveBinarySearch(sortedArray, mid + 1, right , key); } // If the key value is greater than the value at the mid point... call the function again with the midpoint + 1 as the new left most value.
             else { return mid; } // Otherwise (key ==  midpoint value)... return the midpoint value.
-        }
-        return -1;  // If nothing was found, return -1.
+        } else { return -1; } // If nothing was found, return -1. 
     }
 }

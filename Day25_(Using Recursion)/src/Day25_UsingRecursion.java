@@ -70,13 +70,18 @@ public class Day25_UsingRecursion {
 	public void ReverseString(String inputString) {
 		String inputSubString;		// This is a substring of the input text (will be all but the last character).
 		Character lastChar;			// This is the last character from the input string.
+		// Base case for when the string is 1 character long
+		if(inputString.length() == 1) { lblReversedString.setText(lblReversedString.getText() + inputString); }
 		
 		// If the string isn't blank...
-		if(inputString.length() > 0) {
+		else if (!inputString.isBlank()) {
 			inputSubString = inputString.substring(0, inputString.length() - 1); // Get the entire string except the last character.
 			lastChar = inputString.charAt(inputString.length() - 1);			 // Get the last character from the input string.
 			lblReversedString.setText(lblReversedString.getText() + lastChar);	 // Print the last character.
 			ReverseString(inputSubString);										 // Call the reverse string function again, passing the substring instead.
+		}
+		else {
+			JOptionPane.showMessageDialog(null, "Please enter an actual string!");
 		}
 	}
 }
